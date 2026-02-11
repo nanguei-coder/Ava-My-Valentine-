@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ava 💘 Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      overflow: hidden;
+      text-align: center;
+      color: #b30059;
+    }
+
+    h1 {
+      margin-top: 70px;
+      font-size: 3rem;
+      text-shadow: 2px 2px #fff;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin: 10px 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      width: 80%;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #ddd;
+      color: #444;
+      position: absolute;
+    }
+
+    #message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff1a75;
+      font-size: 20px;
+      animation: float 5s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-800px); opacity: 0; }
+    }
+
+    .edgar {
+      font-size: 1.1rem;
+      color: #660033;
+      margin-top: 15px;
+      background: #ffe6f2;
+      padding: 12px;
+      border-radius: 15px;
+    }
+
+    .catBtn {
+      background: #ffccff;
+      color: #660033;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .catBtn:hover {
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    .footer {
+      font-size: 0.9rem;
+      margin-top: 25px;
+      color: #993366;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Ava 💘</h1>
+    <p>Will you be my Valentine?</p>
+
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">NO 🙄</button>
+
+    <div id="message"></div>
+
+    <div class="edgar" id="edgarBox">
+      ⚔️ Edgar is watching... trying to steal your heart.<br>
+      But he doesn’t stand a chance 😤💘
+    </div>
+
+    <button class="catBtn" id="catBtn">🐱 If you're nagging, press this</button>
+
+    <div class="footer">
+      Made with love, chaos, and questionable cat noises.
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const catBtn = document.getElementById("catBtn");
+
+    // Position NO button initially
+    noBtn.style.top = "250px";
+    noBtn.style.left = "50%";
+    noBtn.style.transform = "translateX(-50%)";
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      message.innerHTML = "YAAAAAY 💖💖💖<br>Edgar has been defeated 😭⚔️<br><br>Now you are officially my Valentine, Ava 💘";
+      message.style.color = "#ff0066";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      // Confetti hearts spam
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    });
+
+    catBtn.addEventListener("click", () => {
+      const sounds = [
+        "MREOWWW 😾",
+        "MRRRRP 😼",
+        "NYAAAAAA 😹",
+        "MIAAAAOWWW 😽",
+        "HISSSSS... just kidding 😇",
+        "MREH MREH MREH 😭🐱"
+      ];
+      message.innerHTML = sounds[Math.floor(Math.random() * sounds.length)];
+      message.style.color = "#660033";
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+      heart.style.fontSize = (Math.random() * 30 + 15) + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    // continuous floating hearts
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
